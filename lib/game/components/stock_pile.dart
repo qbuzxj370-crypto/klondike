@@ -24,9 +24,16 @@ class StockPile extends StatelessWidget {
       height: height,
       child: GestureDetector(
         onTap: controller.tapStock,
+        behavior: HitTestBehavior.opaque,
         child: controller.engine.state.stock.isNotEmpty
             ? CardBack(width: width, height: height)
-            : SizedBox(width: width, height: height), // Empty
+            : SizedBox(
+                width: width,
+                height: height,
+                child: controller.engine.state.waste.isNotEmpty
+                    ? const Icon(Icons.refresh, color: Colors.white54, size: 30)
+                    : null,
+              ),
       ),
     );
   }
